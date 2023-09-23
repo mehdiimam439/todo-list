@@ -1,0 +1,19 @@
+* {
+  color: antiquewhite;
+  background-color: black;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+footer {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+}
+
+li {
+  list-style-type: none;
+}
+
+form {
+  display: inline-block;
+}

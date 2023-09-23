@@ -1,0 +1,25 @@
+<%- include("partials/header.ejs") %>
+
+<h1><%= currentList.name %> List</h1>
+
+<ul>
+  <% currentList.list.forEach((item, index) => { %>
+  <li>
+    <form action="delete" method="POST">
+      <button type="submit" name="index" value="<%= index %>">X</button>
+    </form>
+    <form action="check" method="POST">
+      <input type="hidden" name="index" value="<%= index %>" />
+      <input type="checkbox" onChange="this.form.submit()" id="item-<%= index %>" <% if(item.checked) { %> checked <% } %> />
+      <label for="item-<%= index %>"><%= item.desc %></label>
+    </form>
+  </li>
+  <% }) %>
+</ul>
+
+<form action="add" method="POST">
+  <input type="text" name="task" placeholder="New Task" />
+  <button type="submit">+</button>
+</form>
+
+<%- include("partials/footer.ejs") %>
