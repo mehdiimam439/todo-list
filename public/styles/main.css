@@ -1,3 +1,8 @@
+body {
+  padding-top: 40px;
+  text-align: center;
+}
+
 * {
   color: antiquewhite;
   background-color: black;
@@ -12,6 +17,14 @@ footer {
 
 li {
   list-style-type: none;
+  text-align: left;
+  margin-left: 45%;
+}
+
+input[type="checkbox"]:checked + label {
+  color: antiquewhite;
+  opacity: 50%;
+  text-decoration: line-through;
 }
 
 form {
