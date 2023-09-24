@@ -16,17 +16,17 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
-  res.redirect("/daily");
+  res.render("todo.ejs", { currentList: lists[currentList], lists: lists });
 });
 
-app.get("/daily", (req, res) => {
-  currentList = 0;
-  res.render("todo.ejs", { currentList: lists[currentList] });
+app.post("/", (req, res) => {
+  currentList = req.body.index;
+  res.redirect("/");
 });
 
-app.get("/general", (req, res) => {
-  currentList = 1;
-  res.render("todo.ejs", { currentList: lists[currentList] });
+app.post("/make_list", (req, res) => {
+  if (req.body.listName) lists.push({ name: req.body.listName, list: [] });
+  res.redirect("/");
 });
 
 app.post("/add", (req, res) => {
@@ -34,21 +34,21 @@ app.post("/add", (req, res) => {
     desc: req.body.task,
     checked: false,
   });
-  res.redirect(lists[currentList].name);
+  res.redirect("/");
 });
 
 app.post("/check", (req, res) => {
   lists[currentList].list[req.body.index].checked ^= 1;
-  res.redirect(lists[currentList].name);
+  res.redirect("/");
 });
 
 app.post("/delete", (req, res) => {
   lists[currentList].list.splice(req.body.index, 1);
-  res.redirect(lists[currentList].name);
+  res.redirect("/");
 });
 
 app.listen(port, () => {
   console.log(url);
 });
 
-open(url);
+//open(url);
