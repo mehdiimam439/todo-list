@@ -7,6 +7,15 @@
     <link rel="stylesheet" href="/styles/main.css" />
 </head>
 <body>
-    <a href="/daily">Daily</a>
-    <a href="/general">General</a>
+    <form action="make_list" method="post">
+        <button type="submit">+</button>
+        <input name="listName" type="text" placeholder="New List">
+    </form>
+    <br /><br />
+    <% lists.forEach((list, index) => { %>
+    <form action="/" method="POST">
+        <input type="hidden" name="index" value="<%= index %>" />
+        <input onclick="this.form.submit()" type="button" value="<%= list.name %>" />
+    </form>
+    <% }) %>
     <main>
