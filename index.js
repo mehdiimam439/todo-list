@@ -24,8 +24,14 @@ app.post("/", (req, res) => {
   res.redirect("/");
 });
 
-app.post("/make_list", (req, res) => {
+app.post("/add_list", (req, res) => {
   if (req.body.listName) lists.push({ name: req.body.listName, list: [] });
+  res.redirect("/");
+});
+
+app.post("/delete_list", (req, res) => {
+  if (lists.length > 1)
+    lists = lists.filter((item) => item.name !== req.body.listName);
   res.redirect("/");
 });
 
