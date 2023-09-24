@@ -51,4 +51,4 @@ app.listen(port, () => {
   console.log(url);
 });
 
-//open(url);
+open(url);
