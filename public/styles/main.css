@@ -1,12 +1,33 @@
 body {
   padding-top: 40px;
-  text-align: center;
 }
 
 * {
   color: antiquewhite;
   background-color: black;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+main {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+#lists-section {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#list-pair {
+  margin: 4px;
+}
+
+h1 {
+  margin: 0px;
+  margin-top: 16px;
 }
 
 footer {
@@ -18,7 +39,10 @@ footer {
 li {
   list-style-type: none;
   text-align: left;
-  margin-left: 45%;
+}
+
+#list-delete {
+  margin-right: -7px;
 }
 
 input[type="checkbox"]:checked + label {
