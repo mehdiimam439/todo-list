@@ -7,15 +7,21 @@
     <link rel="stylesheet" href="/styles/main.css" />
 </head>
 <body>
-    <form action="make_list" method="post">
+    <main>
+    <form action="add_list" method="post">
         <button type="submit">+</button>
         <input name="listName" type="text" placeholder="New List">
     </form>
-    <br /><br />
+    <div id="lists-section">
     <% lists.forEach((list, index) => { %>
-    <form action="/" method="POST">
-        <input type="hidden" name="index" value="<%= index %>" />
-        <input onclick="this.form.submit()" type="button" value="<%= list.name %>" />
-    </form>
+        <div id="list-pair">
+        <form action="delete_list" method="POST">
+            <button id="list-delete" type="submit" name="listName" value="<%= list.name %>">X</button>
+        </form>
+        <form action="/" method="POST">
+            <input type="hidden" name="index" value="<%= index %>" />
+            <input id="list-button" onclick="this.form.submit()" type="button" value="<%= list.name %>" />
+        </form>
+        </div>
     <% }) %>
-    <main>
+    </div>
