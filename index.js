@@ -45,10 +45,7 @@ app.post("/delete_list", (req, res) => {
 });
 
 app.post("/add", (req, res) => {
-  lists[currentList].list.push({
-    desc: req.body.task,
-    checked: false,
-  });
+  lists[currentList].push([req.body.task, false]);
   res.redirect("/");
 });
 
