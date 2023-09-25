@@ -3,15 +3,15 @@
 <h1><%= currentList.name %> List</h1>
 
 <ul>
-  <% currentList.list.forEach((item, index) => { %>
+  <% lists[currentList].forEach((item, index) => { %>
   <li>
     <form action="delete" method="POST">
       <button type="submit" name="index" value="<%= index %>">X</button>
     </form>
     <form action="check" method="POST">
       <input type="hidden" name="index" value="<%= index %>" />
-      <input type="checkbox" onChange="this.form.submit()" id="item-<%= index %>" <% if(item.checked) { %> checked <% } %> />
-      <label for="item-<%= index %>"><%= item.desc %></label>
+      <input type="checkbox" onChange="this.form.submit()" id="item-<%= index %>" <% if(item[1]) { %> checked <% } %> />
+      <label for="item-<%= index %>"><%= item[0] %></label>
     </form>
   </li>
   <% }) %>
