@@ -55,7 +55,7 @@ app.post("/check", (req, res) => {
 });
 
 app.post("/delete", (req, res) => {
-  lists[currentList].list.splice(req.body.index, 1);
+  lists[currentList].splice(req.body.index, 1);
   res.redirect("/");
 });
 
