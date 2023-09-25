@@ -53,7 +53,7 @@ app.post("/add", (req, res) => {
 });
 
 app.post("/check", (req, res) => {
-  lists[currentList].list[req.body.index].checked ^= 1;
+  lists[currentList][req.body.index][1] ^= 1;
   res.redirect("/");
 });
 
