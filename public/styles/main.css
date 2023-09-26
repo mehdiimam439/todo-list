@@ -1,5 +1,6 @@
 body {
   padding-top: 40px;
+  overflow: hidden;
 }
 
 * {
@@ -12,6 +13,8 @@ main {
   display: flex;
   align-items: center;
   flex-direction: column;
+  scale: 150%;
+  margin-top: 200px;
 }
 
 #lists-section {
