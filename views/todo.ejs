@@ -1,24 +1,24 @@
 <%- include("partials/header.ejs") %>
 
-<h1><%= currentList %> List</h1>
+<h1><%= lists[currentListIndex][0] %> List</h1>
 
 <ul>
-  <% lists[currentList].forEach((item, index) => { %>
+  <% lists[currentListIndex][1].forEach((task, index) => { %>
   <li>
-    <form action="delete" method="POST">
+    <form action="delete_task" method="POST">
       <button type="submit" name="index" value="<%= index %>">X</button>
     </form>
-    <form action="check" method="POST">
+    <form action="check_task" method="POST">
       <input type="hidden" name="index" value="<%= index %>" />
-      <input type="checkbox" onChange="this.form.submit()" id="item-<%= index %>" <% if(item[1]) { %> checked <% } %> />
-      <label for="item-<%= index %>"><%= item[0] %></label>
+      <input type="checkbox" onChange="this.form.submit()" id="item-<%= index %>" <% if(task[1]) { %> checked <% } %> />
+      <label for="item-<%= index %>"><%= task[0] %></label>
     </form>
   </li>
   <% }) %>
 </ul>
 
-<form action="add" method="POST">
-  <input type="text" name="task" placeholder="New Task" />
+<form action="add_task" method="POST">
+  <input type="text" name="taskName" placeholder="New Task" />
   <button type="submit">+</button>
 </form>
 

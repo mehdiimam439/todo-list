@@ -6,56 +6,64 @@ const app = express();
 const port = 3000;
 const url = `http://localhost:${port}`;
 
-var lists = [];
-lists["Daily"] = [
-  ["stuffA", true],
-  ["stuffB", false],
+var lists = [
+  [
+    "Daily",
+    [
+      ["Do homework", true],
+      ["Feed cat", false],
+    ],
+  ],
+  [
+    "General",
+    [
+      ["Adopt cat", false],
+      ["Graduate", true],
+    ],
+  ],
 ];
 
-//   { name: "Daily", list: [] },
-//   { name: "General", list: [] },
-// ];
-var currentList = "Daily";
+var currentListIndex = 0;
 
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
-  res.render("todo.ejs", { currentList: currentList, lists: lists });
+  res.render("todo.ejs", { lists: lists, currentListIndex: currentListIndex });
 });
 
-app.post("/", (req, res) => {
-  currentList = req.body.index;
+app.post("/add_task", (req, res) => {
+  lists[currentListIndex][1].push([req.body.taskName, false]);
+  res.redirect("/");
+});
+
+app.post("/check_task", (req, res) => {
+  lists[currentListIndex][1][req.body.index][1] ^= 1;
+  res.redirect("/");
+});
+
+app.post("/delete_task", (req, res) => {
+  lists[currentListIndex][1].splice(req.body.index, 1);
   res.redirect("/");
 });
 
 app.post("/add_list", (req, res) => {
-  if (req.body.listName) lists.push({ name: req.body.listName, list: [] });
+  if (req.body.listName) lists.push([req.body.listName, []]);
+  res.redirect("/");
+});
+
+app.post("/select_list", (req, res) => {
+  currentListIndex = req.body.index;
   res.redirect("/");
 });
 
 app.post("/delete_list", (req, res) => {
   if (lists.length > 1) {
-    if (req.body.index === currentList) {
-      req.body.index === 0 ? currentList++ : currentList--;
+    lists.splice(req.body.index, 1);
+    if (req.body.index === currentListIndex) {
+      currentListIndex = 0;
     }
-    lists = lists.filter((item) => item.name !== req.body.listName);
   }
-  res.redirect("/");
-});
-
-app.post("/add", (req, res) => {
-  lists[currentList].push([req.body.task, false]);
-  res.redirect("/");
-});
-
-app.post("/check", (req, res) => {
-  lists[currentList][req.body.index][1] ^= 1;
-  res.redirect("/");
-});
-
-app.post("/delete", (req, res) => {
-  lists[currentList].splice(req.body.index, 1);
   res.redirect("/");
 });
 
@@ -63,4 +71,4 @@ app.listen(port, () => {
   console.log(url);
 });
 
-//open(url);
+open(url);

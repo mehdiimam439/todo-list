@@ -8,20 +8,19 @@
 </head>
 <body>
     <main>
-    <form action="add_list" method="post">
+    <form action="add_list" method="POST">
         <button type="submit">+</button>
-        <input name="listName" type="text" placeholder="New List">
+        <input type="text" name="listName" placeholder="New List">
     </form>
     <div id="lists-section">
     <% lists.forEach((list, index) => { %>
         <div id="list-pair">
         <form action="delete_list" method="POST">
-            <input type="hidden" name="index" value="<%= index %>" />
-            <button id="list-delete" type="submit" name="listName" value="<%= list.name %>">X</button>
+            <button id="list-delete" type="submit" name="index" value="<%= index %>">X</button>
         </form>
-        <form action="/" method="POST">
+        <form action="/select_list" method="POST">
             <input type="hidden" name="index" value="<%= index %>" />
-            <input id="list-button" onclick="this.form.submit()" type="button" value="<%= list.name %>" />
+            <input id="list-button" onclick="this.form.submit()" type="button" value="<%= list[0] %>" />
         </form>
         </div>
     <% }) %>
